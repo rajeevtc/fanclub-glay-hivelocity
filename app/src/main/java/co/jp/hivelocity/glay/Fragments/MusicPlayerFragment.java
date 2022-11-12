@@ -1,4 +1,4 @@
-package co.jp.hivelocity.glay;
+package co.jp.hivelocity.glay.Fragments;
 
 import android.os.Bundle;
 

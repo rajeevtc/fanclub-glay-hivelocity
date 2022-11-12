@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GLAY_Trial_HVC">
         <activity
-            android:name=".glay.MainActivity"
+            android:name=".glay.Activities.MainActivity"
             android:exported="true">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />

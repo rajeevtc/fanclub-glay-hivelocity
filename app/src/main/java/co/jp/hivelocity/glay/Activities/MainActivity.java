@@ -1,4 +1,4 @@
-package co.jp.hivelocity.glay;
+package co.jp.hivelocity.glay.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
