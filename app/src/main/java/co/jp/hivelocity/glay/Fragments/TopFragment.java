@@ -15,12 +15,17 @@ import java.util.List;
 
 import co.jp.hivelocity.databinding.FragmentTopBinding;
 import co.jp.hivelocity.glay.Adapters.TopMenuRecyclerViewAdapter;
+import co.jp.hivelocity.glay.DependencyInjection.Injections;
 import co.jp.hivelocity.glay.Models.TopMenuItem;
+import co.jp.hivelocity.glay.Repositories.TopDataSource;
+import co.jp.hivelocity.glay.Repositories.TopRepository;
+import co.jp.hivelocity.glay.ViewModels.TopViewModel;
 
 public class TopFragment extends Fragment {
 
     private FragmentTopBinding binding;
     TopMenuRecyclerViewAdapter adapter;
+    TopViewModel viewModel;
 
     static final List<TopMenuItem> itemsList = new ArrayList<TopMenuItem>() {{
         add(TopMenuItem.Music);
@@ -42,7 +47,9 @@ public class TopFragment extends Fragment {
     }
 
     private void init() {
+        viewModel = new TopViewModel(Injections.provideTopRepository());
         setupRecyclerView();
+        fetchTopImages();
     }
 
     void setupRecyclerView() {
@@ -50,6 +57,10 @@ public class TopFragment extends Fragment {
         TopMenuRecyclerViewAdapter adapter = new TopMenuRecyclerViewAdapter(itemsList);
         binding.topMenuItemsRecyclerView.setAdapter(adapter);
         binding.topMenuItemsRecyclerView.setLayoutManager(layoutManager);
+    }
+
+    void fetchTopImages() {
+        viewModel.fetchTopImages();
     }
 
 }
