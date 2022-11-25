@@ -23,7 +23,7 @@ public class TopMenuRecyclerViewAdapter extends RecyclerView.Adapter<TopMenuRecy
     @Override
     public TopMenuItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        return new TopMenuItemViewHolder(TopMenuItemBinding.inflate(inflater));
+        return new TopMenuItemViewHolder(TopMenuItemBinding.inflate(inflater, parent, false));
     }
 
     @Override
