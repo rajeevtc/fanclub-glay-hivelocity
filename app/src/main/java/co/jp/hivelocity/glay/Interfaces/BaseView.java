@@ -1,7 +1,6 @@
 package co.jp.hivelocity.glay.Interfaces;
 
-public interface BaseView<T> {
-    void setPresenter(T presenter);
+public interface BaseView {
     void showError(Error error);
     void showLoadingIndicator(Boolean status);
 }

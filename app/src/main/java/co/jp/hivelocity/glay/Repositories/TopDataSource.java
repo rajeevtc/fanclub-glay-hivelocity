@@ -1,8 +1,7 @@
 package co.jp.hivelocity.glay.Repositories;
 
-import java.util.Observable;
-
 import co.jp.hivelocity.glay.ApiRestAdapters.FanstreamingApiRestAdapters;
+import co.jp.hivelocity.glay.Interfaces.TopAPI;
 import co.jp.hivelocity.glay.Models.TopModel;
 import retrofit2.Call;
 import retrofit2.Retrofit;

@@ -1,4 +1,4 @@
-package co.jp.hivelocity.glay.Repositories;
+package co.jp.hivelocity.glay.Interfaces;
 
 import java.util.Observable;
 
