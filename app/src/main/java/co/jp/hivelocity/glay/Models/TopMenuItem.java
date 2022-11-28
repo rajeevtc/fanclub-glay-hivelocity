@@ -35,20 +35,20 @@ public enum TopMenuItem {
     public String title() {
         switch (this) {
             case Movie:
-                return "Movie";
+                return "MOVIE";
             case Music:
-                return "Music";
+                return "MUSIC";
             case News:
-                return "News";
+                return "NEWS";
             case ARCamera:
-                return "AR Camera";
+                return "AR CAMERA";
             case LiveStreaming:
-                return "Live";
+                return "LIVE";
             case Photos:
-                return "Photos";
+                return "PHOTOS";
             case Profile:
-                return "Profile";
+                return "PROFILE";
         }
-        return "Music";
+        return "MUSIC";
     }
 }

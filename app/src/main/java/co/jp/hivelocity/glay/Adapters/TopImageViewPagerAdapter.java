@@ -28,8 +28,8 @@ public class TopImageViewPagerAdapter extends RecyclerView.Adapter<TopImageViewP
     @NonNull
     @Override
     public TopImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        return new TopImageViewHolder(TopImageItemBinding.inflate(inflater));
+        LayoutInflater inflater = LayoutInflater.from(context);
+        return new TopImageViewHolder(TopImageItemBinding.inflate(inflater, parent, false));
     }
 
     @Override
