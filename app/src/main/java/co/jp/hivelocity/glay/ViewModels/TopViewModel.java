@@ -2,11 +2,13 @@ package co.jp.hivelocity.glay.ViewModels;
 
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import co.jp.hivelocity.glay.Interfaces.BaseView;
 import co.jp.hivelocity.glay.Models.TopDataModel;
+import co.jp.hivelocity.glay.Models.TopMenuItem;
 import co.jp.hivelocity.glay.Repositories.TopRepository;
 
 public class TopViewModel implements TopRepository.TopAPICallBacks {
@@ -18,6 +20,16 @@ public class TopViewModel implements TopRepository.TopAPICallBacks {
     TopRepository repository;
 
     ScreenListeners listeners;
+
+    public List<TopMenuItem> itemsList = new ArrayList<TopMenuItem>() {{
+        add(TopMenuItem.Music);
+        add(TopMenuItem.Movie);
+        add(TopMenuItem.LiveStreaming);
+        add(TopMenuItem.ARCamera);
+        add(TopMenuItem.Photos);
+        add(TopMenuItem.News);
+        add(TopMenuItem.Profile);
+    }};
 
     public TopRepository getRepository() {
         return repository;

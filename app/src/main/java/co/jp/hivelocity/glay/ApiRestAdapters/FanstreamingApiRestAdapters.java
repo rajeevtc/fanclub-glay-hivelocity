@@ -27,9 +27,9 @@ public class FanstreamingApiRestAdapters {
             apiAuth = new HVCAPIAuth(
                     APIConfigurations.ApiKey,
                     APIConfigurations.ApiSecret,
-                    APIConfigurations.HeaderNameForApiKey,
-                    APIConfigurations.HeaderNameForTimestamp,
-                    APIConfigurations.HeaderNameForSignature
+                    APIConfigurations.HeaderNameFanApiKey,
+                    APIConfigurations.HeaderNameFanTimestamp,
+                    APIConfigurations.HeaderNameFanSignature
             );
             Log.e("Building", "FanStreamingHeaders");
         }
