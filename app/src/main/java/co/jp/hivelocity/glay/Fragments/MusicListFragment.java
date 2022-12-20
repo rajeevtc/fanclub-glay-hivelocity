@@ -3,64 +3,78 @@ package co.jp.hivelocity.glay.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+
+import java.util.List;
+import java.util.Objects;
+
 import co.jp.hivelocity.R;
+import co.jp.hivelocity.databinding.FragmentMusicListBinding;
+import co.jp.hivelocity.glay.Adapters.MusicListRecyclerViewAdapter;
+import co.jp.hivelocity.glay.DependencyInjection.Injections;
+import co.jp.hivelocity.glay.Models.MusicGroupStreamsModel;
+import co.jp.hivelocity.glay.Repositories.MusicGroupRepository;
+import co.jp.hivelocity.glay.ViewModels.MusicStreamsListViewModel;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link MusicListFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * create by rajeev
  */
-public class MusicListFragment extends Fragment {
+public class MusicListFragment extends Fragment implements MusicStreamsListViewModel.ScreenListeners  {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public MusicListFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MusicListFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MusicListFragment newInstance(String param1, String param2) {
-        MusicListFragment fragment = new MusicListFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    FragmentMusicListBinding binding;
+    MusicStreamsListViewModel viewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_music_list, container, false);
+        binding = FragmentMusicListBinding.inflate(inflater, container, false);
+        init();
+        return binding.getRoot();
+    }
+
+    void init() {
+        viewModel = new MusicStreamsListViewModel(Injections.provideMusicStreamsRepository(), this);
+        fetchMusicGroupStreams();
+    }
+
+    void fetchMusicGroupStreams() {
+        viewModel.fetchMusicGroupStreams();
+    }
+
+    void setupMusicListRecyclerView(List<MusicStreamsListViewModel.MusicStreamItemViewModel> listItemViewModel) {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        MusicListRecyclerViewAdapter adapter = new MusicListRecyclerViewAdapter(listItemViewModel, getContext());
+        binding.recyclerViewMusicList.setAdapter(adapter);
+        binding.recyclerViewMusicList.setLayoutManager(layoutManager);
+    }
+
+    @Override
+    public void loadStreamList(List<MusicStreamsListViewModel.MusicStreamItemViewModel> listItemViewModel) {
+        Log.d(String.valueOf(listItemViewModel), "Value of streams");
+        setupMusicListRecyclerView(listItemViewModel);
+    }
+
+    @Override
+    public void loadHeader(MusicStreamsListViewModel.MusicStreamHeaderViewModel headerViewModel) {
+        String headerImage = headerViewModel.getGroupCoverImage();
+        Glide.with(getContext())
+                .load(headerImage)
+                .into(binding.imageViewHeader);
+
+        binding.textViewHeader.setText(headerViewModel.getGroupTitle());
     }
 }

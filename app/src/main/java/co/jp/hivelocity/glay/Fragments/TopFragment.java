@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
@@ -29,22 +31,12 @@ import co.jp.hivelocity.glay.Repositories.TopDataSource;
 import co.jp.hivelocity.glay.Repositories.TopRepository;
 import co.jp.hivelocity.glay.ViewModels.TopViewModel;
 
-public class TopFragment extends Fragment implements TopViewModel.ScreenListeners {
+public class TopFragment extends Fragment implements TopViewModel.ScreenListeners, TopMenuRecyclerViewAdapter.TopMenuItemClickListeners {
 
     private FragmentTopBinding binding;
     TopImageViewPagerAdapter adapter;
 
     TopViewModel viewModel;
-
-    static final List<TopMenuItem> itemsList = new ArrayList<TopMenuItem>() {{
-        add(TopMenuItem.Music);
-        add(TopMenuItem.Movie);
-        add(TopMenuItem.LiveStreaming);
-        add(TopMenuItem.ARCamera);
-        add(TopMenuItem.Photos);
-        add(TopMenuItem.News);
-        add(TopMenuItem.Profile);
-    }};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,7 +55,7 @@ public class TopFragment extends Fragment implements TopViewModel.ScreenListener
 
     void setupRecyclerView() {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this.getContext(), 1, RecyclerView.HORIZONTAL, false);
-        TopMenuRecyclerViewAdapter adapter = new TopMenuRecyclerViewAdapter(itemsList);
+        TopMenuRecyclerViewAdapter adapter = new TopMenuRecyclerViewAdapter(viewModel.itemsList, this);
         binding.topMenuItemsRecyclerView.setAdapter(adapter);
         binding.topMenuItemsRecyclerView.setLayoutManager(layoutManager);
     }
@@ -115,5 +107,12 @@ public class TopFragment extends Fragment implements TopViewModel.ScreenListener
     public void showTopImages(List<String> list) {
         Log.d(String.valueOf(list), "value in response");
         setUpTopImages(list);
+    }
+
+    @Override
+    public void onTopMenuClick(TopMenuItem item) {
+        Log.d(item.title(), "item details");
+        NavDirections action = item.navigationDirection();
+        Navigation.findNavController(binding.getRoot()).navigate(action);
     }
 }

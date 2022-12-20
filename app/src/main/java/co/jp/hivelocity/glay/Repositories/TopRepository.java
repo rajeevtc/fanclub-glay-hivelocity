@@ -17,6 +17,7 @@ public class TopRepository {
 
     @NonNull
     TopDataSource dataSource;
+
     TopAPICallBacks callbacks;
 
     public TopRepository(@NonNull TopDataSource dataSource) {

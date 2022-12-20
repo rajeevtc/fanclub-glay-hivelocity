@@ -9,5 +9,22 @@
         android:id="@+id/topFragment"
         android:name="co.jp.hivelocity.glay.Fragments.TopFragment"
         android:label="fragment_top"
-        tools:layout="@layout/fragment_top" />
+        tools:layout="@layout/fragment_top" >
+        <action
+            android:id="@+id/action_topFragment_to_musicListFragment"
+            app:destination="@id/musicListFragment" />
+        <action
+            android:id="@+id/action_topFragment_to_movieListFragment"
+            app:destination="@id/movieListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/musicListFragment"
+        android:name="co.jp.hivelocity.glay.Fragments.MusicListFragment"
+        android:label="fragment_music_list"
+        tools:layout="@layout/fragment_music_list" />
+    <fragment
+        android:id="@+id/movieListFragment"
+        android:name="co.jp.hivelocity.glay.Fragments.MovieListFragment"
+        android:label="fragment_movie_list"
+        tools:layout="@layout/fragment_movie_list" />
 </navigation>

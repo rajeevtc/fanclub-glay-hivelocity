@@ -1,6 +1,8 @@
 package co.jp.hivelocity.glay.Adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -15,8 +17,11 @@ public class TopMenuRecyclerViewAdapter extends RecyclerView.Adapter<TopMenuRecy
 
     private List<TopMenuItem> menuList;
 
-    public TopMenuRecyclerViewAdapter(List<TopMenuItem> menuList) {
+    private TopMenuItemClickListeners listeners;
+
+    public TopMenuRecyclerViewAdapter(List<TopMenuItem> menuList, TopMenuItemClickListeners listeners) {
         this.menuList = menuList;
+        this.listeners = listeners;
     }
 
     @NonNull
@@ -38,13 +43,25 @@ public class TopMenuRecyclerViewAdapter extends RecyclerView.Adapter<TopMenuRecy
         return menuList.size();
     }
 
-    class TopMenuItemViewHolder extends RecyclerView.ViewHolder {
+    class TopMenuItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TopMenuItemBinding binding;
 
         public TopMenuItemViewHolder(TopMenuItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+
+            binding.getRoot().setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            TopMenuItem item = menuList.get(this.getLayoutPosition());
+            listeners.onTopMenuClick(item);
+        }
+    }
+
+    public interface TopMenuItemClickListeners {
+        void onTopMenuClick(TopMenuItem item);
     }
 }
