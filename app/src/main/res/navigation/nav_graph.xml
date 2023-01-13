@@ -21,10 +21,32 @@
         android:id="@+id/musicListFragment"
         android:name="co.jp.hivelocity.glay.Fragments.MusicListFragment"
         android:label="fragment_music_list"
-        tools:layout="@layout/fragment_music_list" />
+        tools:layout="@layout/fragment_music_list" >
+        <action
+            android:id="@+id/action_musicListFragment_to_musicPlayerFragment"
+            app:destination="@id/musicPlayerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/movieListFragment"
         android:name="co.jp.hivelocity.glay.Fragments.MovieListFragment"
         android:label="fragment_movie_list"
-        tools:layout="@layout/fragment_movie_list" />
+        tools:layout="@layout/fragment_movie_list" >
+        <action
+            android:id="@+id/action_movieListFragment_to_moviePlayerFragment"
+            app:destination="@id/moviePlayerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/moviePlayerFragment"
+        android:name="co.jp.hivelocity.glay.Fragments.MoviePlayerFragment"
+        android:label="fragment_movie_player"
+        tools:layout="@layout/fragment_movie_player" />
+    <fragment
+        android:id="@+id/musicPlayerFragment"
+        android:name="co.jp.hivelocity.glay.Fragments.MusicPlayerFragment"
+        android:label="fragment_music_player"
+        tools:layout="@layout/fragment_music_player" >
+        <argument
+            android:name="musicDetails"
+            app:argType="co.jp.hivelocity.glay.ViewModels.MusicStreamItemViewModel" />
+    </fragment>
 </navigation>
