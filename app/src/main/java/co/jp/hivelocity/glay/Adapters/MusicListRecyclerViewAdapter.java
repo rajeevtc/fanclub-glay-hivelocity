@@ -2,6 +2,7 @@ package co.jp.hivelocity.glay.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -10,15 +11,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import co.jp.hivelocity.databinding.MusicStreamsListItemBinding;
+import co.jp.hivelocity.glay.ViewModels.MusicStreamItemViewModel;
 import co.jp.hivelocity.glay.ViewModels.MusicStreamsListViewModel;
 
 public class MusicListRecyclerViewAdapter extends RecyclerView.Adapter<MusicListRecyclerViewAdapter.MusicListItemViewHolder> {
-    List<MusicStreamsListViewModel.MusicStreamItemViewModel> itemsViewModel;
+    List<MusicStreamItemViewModel> itemsViewModel;
     Context context;
+    MusicListItemClickListeners listeners;
 
-    public MusicListRecyclerViewAdapter(List<MusicStreamsListViewModel.MusicStreamItemViewModel> itemsViewModel, Context context) {
+    public MusicListRecyclerViewAdapter(List<MusicStreamItemViewModel> itemsViewModel, Context context, MusicListItemClickListeners listeners) {
         this.itemsViewModel = itemsViewModel;
         this.context = context;
+        this.listeners = listeners;
     }
 
     @NonNull
@@ -31,7 +35,7 @@ public class MusicListRecyclerViewAdapter extends RecyclerView.Adapter<MusicList
 
     @Override
     public void onBindViewHolder(@NonNull MusicListItemViewHolder holder, int position) {
-        MusicStreamsListViewModel.MusicStreamItemViewModel itemViewModel = itemsViewModel.get(position);
+        MusicStreamItemViewModel itemViewModel = itemsViewModel.get(position);
         holder.binding.textViewItemNumber.setText(itemViewModel.getItemNumber().toString());
         holder.binding.textViewSongName.setText(itemViewModel.getMusicTitle());
         holder.binding.textViewSongRuntime.setText(itemViewModel.getMusicRuntime());
@@ -42,13 +46,24 @@ public class MusicListRecyclerViewAdapter extends RecyclerView.Adapter<MusicList
         return itemsViewModel.size();
     }
 
-    public class MusicListItemViewHolder extends RecyclerView.ViewHolder {
+    public class MusicListItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         MusicStreamsListItemBinding binding;
 
         public MusicListItemViewHolder(MusicStreamsListItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            binding.getRoot().setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            MusicStreamItemViewModel itemViewModel = itemsViewModel.get(getLayoutPosition());
+            listeners.musicListItemClicked(itemViewModel);
+        }
+    }
+
+    public interface MusicListItemClickListeners {
+        void musicListItemClicked(MusicStreamItemViewModel itemViewModel);
     }
 }

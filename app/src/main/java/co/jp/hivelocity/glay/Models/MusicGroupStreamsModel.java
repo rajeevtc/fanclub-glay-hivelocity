@@ -98,6 +98,14 @@ public class MusicGroupStreamsModel {
         @Expose
         private String runtime;
 
+        @SerializedName("large_cover_image_url")
+        @Expose
+        private String coverImage;
+
+        public String getCoverImage() {
+            return coverImage;
+        }
+
         public Integer getId() {
             return id;
         }
