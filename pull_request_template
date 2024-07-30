@@ -1,0 +1,34 @@
+## Overview
+
+Overview section is a summary of the change made in the pull request. It should tell the reason why we need the change such as background or current issue you want to solve with the pr, how you implemented (in short), heads up, etc.
+
+
+## Detail
+
+Detail section should explain the detail of the change, mostly for technical stuff.
+
+
+## Todo (optional)
+
+You can include TODO section if know what you need to do in the pr. You will need this section if you create a pull request before you start working on a task. It would be helpful is this is written in Jira task, we don’t usually check other one’s pull requests on a regular basis, so the description of Jira task is a better place to let other ones know your progress.
+
+- [ ] todo item one.
+- [ ] todo item two.
+- [ ] todo item three.
+
+
+# Checks
+
+Checks section should explain what you’ve checked after your changes.  
+This is important for showing that how deep you’ve verified your implementation/changes.  
+Reviewer (or other one) can know what cases were checked and what cases were not.
+Generally check box is used to show a check item and its status. - [ ] is used for unfinished item and - [x] is used for completed item.
+
+- [ ] pass unit test on local
+- [ ] pass unit test on CI
+- [ ] other check item
+
+
+## Results
+
+Results section should contain the result of the change. It can contain only text output, or screen shots of before and after the change, or videos of before and after. Be conscious if other one including the reviewer  of your pr can understand what was the change.
